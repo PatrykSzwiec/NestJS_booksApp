@@ -6,6 +6,25 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Author {
+  id String  @id @default(uuid())
+  name String @unique
+  country String
+  books Book[]
+}
+
+model Book {
+  id String @id @default(uuid())
+  title String @unique
+  rating Float
+  price String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authorId String
+  author   Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
