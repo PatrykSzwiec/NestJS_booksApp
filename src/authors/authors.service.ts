@@ -42,4 +42,10 @@ export class AuthorsService {
       throw new ConflictException('Name is already taken');
     throw error;
   }
+
+  public deleteById(id: Author['id']): Promise<Author> {
+    return this.prismaService.author.delete({
+      where: { id },
+    });
+  }
 }
