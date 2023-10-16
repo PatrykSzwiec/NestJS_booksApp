@@ -12,7 +12,7 @@ import { BooksModule } from './books/books.module';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
