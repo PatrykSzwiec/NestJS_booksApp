@@ -8,14 +8,15 @@ import * as cors from 'cors';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthorsModule } from './authors/authors.module';
-import { BooksController } from './books/books.controller';
-import { BooksService } from './books/books.service';
 import { BooksModule } from './books/books.module';
+import { UsersController } from './users/users/users.controller';
+import { UsersService } from './users/users/users.service';
+import { UsersModule } from './users/users/users.module';
 
 @Module({
-  imports: [AuthorsModule, BooksModule],
-  controllers: [AppController, BooksController],
-  providers: [AppService, BooksService],
+  imports: [AuthorsModule, BooksModule, UsersModule],
+  controllers: [AppController, UsersController],
+  providers: [AppService, UsersService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
