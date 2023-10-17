@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// AUTHORS MODELS
 model Author {
   id String  @id @default(uuid())
   name String @unique
@@ -17,6 +18,7 @@ model Author {
   books Book[]
 }
 
+/// BOOKS MODELS
 model Book {
   id String @id @default(uuid())
   title String @unique
@@ -27,8 +29,21 @@ model Book {
 
   authorId String
   author   Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  users UserOnBooks[]
 }
 
+model UserOnBooks {
+  book   Book @relation(fields: [bookId], references: [id])
+  bookId String // relation scalar field (used in the `@relation` attribute above)
+  user   User @relation(fields: [userId], references: [id])
+  userId String // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([bookId, userId])
+}
+
+
+/// USERS AND ROLES MODELS
 enum Role {
   USER
   ADMIN
@@ -39,6 +54,8 @@ model User {
   email String @unique
   role Role @default(USER)
   password Password?
+
+  books UserOnBooks[]
 }
 
 model Password {
